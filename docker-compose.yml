@@ -1,0 +1,61 @@
+# Stroom compose file, bundling a Stroom instance and supporting database services.
+#
+#
+# More information:
+# - Stroom repository: https://github.com/gchq/stroom
+# - Stroom environment variables: https://github.com/gchq/stroom-docs/blob/master/install-guide/stroom-app-install.md
+#
+# Version: 1.0.1
+# Date: 25 Sep 2018
+# Author: Peter Kimberley
+#
+
+version: "3"
+
+services:
+  stroom:
+    image: gchq/stroom:v5-latest
+    container_name: stroom
+    environment:
+      TEMP_DIR: /tmp
+      NODE: node1
+      RACK: rack1
+      PORT_PREFIX: 8080
+      JAVA_OPTS: '-Xms1g -Xmx8g'
+      STROOM_JDBC_DRIVER_URL: jdbc:mysql://stroom-db:3306/stroom?useUnicode=yes&characterEncoding=UTF-8
+      STROOM_JDBC_DRIVER_USERNAME: stroom-user
+      STROOM_JDBC_DRIVER_PASSWORD: stroom-password
+      STROOM_STATISTICS_SQL_JDBC_DRIVER_URL: jdbc:mysql://stats-db:3306/statistics?useUnicode=yes&characterEncoding=UTF-8
+      STROOM_STATISTICS_SQL_JDBC_DRIVER_USERNAME: stroom-user
+      STROOM_STATISTICS_SQL_JDBC_DRIVER_PASSWORD: stroom-password
+    volumes:
+      - ./data:/root/.stroom
+    links:
+      - stroom-db
+      - stats-db
+    ports:
+      - 8080:8080
+  stroom-db:
+    image: mysql:5.6
+    container_name: stroom-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root-password
+      MYSQL_USER: stroom-user
+      MYSQL_PASSWORD: stroom-password
+      MYSQL_DATABASE: stroom
+    volumes:
+      - ./db/stroom:/var/lib/mysql
+    expose:
+      - 3306
+  stats-db:
+      image: mysql:5.6
+      container_name: stroom-stats-db
+      environment:
+        MYSQL_ROOT_PASSWORD: root-password
+        MYSQL_USER: stroom-user
+        MYSQL_PASSWORD: stroom-password
+        MYSQL_DATABASE: statistics
+      volumes:
+        - ./db/statistics:/var/lib/mysql
+      expose:
+        - 3306
