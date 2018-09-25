@@ -1,4 +1,4 @@
-# stroom-docker-compose
+# Stroom Docker Compose deployment script
 Docker Compose file implementing a simple baseline Stroom configuration, consisting of the following services:
 1. Stroom instance
 1. Separate MySQL Stroom application and statistics databases
@@ -12,7 +12,7 @@ Docker Compose file implementing a simple baseline Stroom configuration, consist
 1. Wait for Stroom to download and initialise
 1. Open http://localhost:8080/stroom
 
-For more information on Stroom:
+# More information on Stroom:
 - Main Stroom repository: https://github.com/gchq/stroom
 - Stroom configuration options: https://github.com/gchq/stroom-docs/blob/master/install-guide/stroom-app-install.md
 - Documentation: https://gchq.github.io/stroom-docs
