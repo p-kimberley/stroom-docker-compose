@@ -22,7 +22,7 @@ services:
       NODE: node1
       RACK: rack1
       PORT_PREFIX: 8080
-      JAVA_OPTS: '-Xms1g -Xmx8g'
+      JAVA_OPTS: '-Xms4g -Xmx8g'
       STROOM_JDBC_DRIVER_URL: jdbc:mysql://stroom-db:3306/stroom?useUnicode=yes&characterEncoding=UTF-8
       STROOM_JDBC_DRIVER_USERNAME: stroom-user
       STROOM_JDBC_DRIVER_PASSWORD: stroom-password
