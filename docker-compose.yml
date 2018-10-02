@@ -5,8 +5,8 @@
 # - Stroom repository: https://github.com/gchq/stroom
 # - Stroom environment variables: https://github.com/gchq/stroom-docs/blob/master/install-guide/stroom-app-install.md
 #
-# Version: 1.0.1
-# Date: 25 Sep 2018
+# Version: 1.0.2
+# Date: 02 Oct 2018
 # Author: Peter Kimberley
 #
 
@@ -16,6 +16,7 @@ services:
   stroom:
     image: gchq/stroom:v5-latest
     container_name: stroom
+    restart: always
     environment:
       TEMP_DIR: /tmp
       NODE: node1
@@ -38,6 +39,7 @@ services:
   stroom-db:
     image: mysql:5.6
     container_name: stroom-db
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root-password
       MYSQL_USER: stroom-user
@@ -50,6 +52,7 @@ services:
   stats-db:
       image: mysql:5.6
       container_name: stroom-stats-db
+      restart: always
       environment:
         MYSQL_ROOT_PASSWORD: root-password
         MYSQL_USER: stroom-user
